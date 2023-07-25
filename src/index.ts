@@ -1,17 +1,19 @@
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
+
+
 const list = document.querySelector<HTMLUListElement>('.list');
 const form = document.getElementById('new-task-form') as HTMLFormElement | null
 const input = document.querySelector<HTMLInputElement>('#new-task-title');
 const menuItems: NodeListOf<HTMLAnchorElement> = document.querySelectorAll ('nav ul li a');
-const deleteButton: HTMLButtonElement | null = document.querySelector('#delete');
 const titleState = document.getElementById('title-state') as HTMLTitleElement | null;
+
 let noEmpty = document.getElementsByClassName('empty')[0] as HTMLDivElement | null;
 let doneCounter = document.getElementById('done-counter') as HTMLSpanElement | null;
 let taskCounter = document.getElementById('task-counter') as HTMLSpanElement | null;
-
-
 let day:string = "today";
 let tasks:Task[] = loadTasks(day);
+
+
 tasks.forEach(addListItem)
 updateDoneCounter(day);
 if (titleState) titleState.textContent = day;
@@ -101,7 +103,7 @@ function saveTasks(day:string) {
 }
 function loadTasks(day: string): Task[] {
     const taskJSON = localStorage.getItem(day);
-    if (!taskJSON) return []; // Перевірка на null
+    if (!taskJSON) return [];
 
     const tasks = JSON.parse(taskJSON);
     updateDoneCounter(day);
